@@ -7,7 +7,20 @@ var app14=angular.module('app14',[]);
 
 
 
-app14.controller('mainCtrl',function($scope,$http){      
+app14.controller('mainCtrl',function($scope,$http){ 
+    
+    //as soon as app starts call get words
+    getWords();
+
+    function getWords(){
+        var jsonUrl = "http://localhost/speechapp/rest_words/index.json";
+        $http.get(jsonUrl).success(
+            function(data){
+              console.log(data);
+               $scope.words = data;
+            }
+          );
+    }
     
     $scope.getDataTest=function(){
         $http.get("myjsondata.json").success(
